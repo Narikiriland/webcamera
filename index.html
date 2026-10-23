@@ -27,7 +27,7 @@
   --bg: #FFF5F9;
   --paper: #FFFFFF;
   --pink: #FF7BA9;
-  --rose: #E0457B;       /* 高島屋のバラ */
+  --rose: #E0457B;       /* バラ */
   --butter: #FFD66B;
   --mint: #7FD8C6;
   --sky: #8FD3F4;
@@ -429,13 +429,40 @@ body.cam-open .toast { bottom: calc(env(safe-area-inset-bottom, 0px) + 260px); }
 
 #complete-msg .line { display: block; white-space: nowrap; font-size: clamp(12.5px, 3.7vw, 15px); font-weight: 700; }
 
+/* ---------- アカウント ---------- */
+.acct-card { margin: 34px 0 10px; padding: 20px 18px; background: var(--paper); border: var(--line); border-radius: 22px; box-shadow: var(--pop); text-align: center; }
+.acct-title { margin: 0; font-family: var(--display); font-weight: 400; font-size: 21px; }
+.acct-text { margin: 8px 0 0; font-size: 14px; color: var(--ink-2); text-align: left; }
+.acct-user { margin: 10px 0 0; display: grid; gap: 2px; }
+.acct-user span { font-size: 12.5px; color: var(--ink-2); font-weight: 700; }
+.acct-user b { font-size: 15.5px; overflow-wrap: anywhere; }
+.acct-status { margin: 4px 0 0; font-size: 12.5px; color: #2E9E6A; font-weight: 700; min-height: 1em; }
+.acct-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 14px; }
+.acct-danger { color: var(--rose); text-decoration: underline; }
+.acct-note { margin: 10px 0 0; font-size: 12px; color: var(--ink-2); }
+.acct-demo { margin: 10px 0 0; padding: 6px 10px; font-size: 11.5px; background: #F4EFF6; border-radius: 10px; color: var(--ink-2); }
+.acct-form { text-align: left; }
+.acct-form .modal-title, .acct-form .modal-text { text-align: center; }
+.field { display: grid; gap: 4px; margin-top: 14px; font-size: 14px; font-weight: 700; }
+.field input { width: 100%; min-height: 50px; padding: 0 14px; font: inherit; font-size: 16px; font-weight: 500; color: var(--ink); background: #fff; border: var(--line); border-radius: 14px; }
+.field input:focus-visible { outline: 3px solid var(--sky); outline-offset: 1px; }
+.check { display: flex; gap: 10px; align-items: flex-start; margin-top: 14px; font-size: 13.5px; line-height: 1.6; }
+.check input { flex: none; width: 22px; height: 22px; margin-top: 2px; accent-color: var(--rose); }
+.check a { color: var(--rose); font-weight: 700; }
+.form-err { margin: 10px 0 0; min-height: 1.2em; font-size: 13.5px; font-weight: 700; color: #C8213A; }
+.form-switch { display: grid; gap: 4px; margin: 14px 0 0; text-align: center; }
+.form-switch button { min-height: 40px; border: 0; background: none; font-size: 14px; font-weight: 700; color: var(--ink-2); text-decoration: underline; }
+.btn-danger { background: #FF8FA3; }
+.btn:disabled { opacity: .6; cursor: default; }
+#acct-sheet .modal-sheet { max-height: 92vh; overflow-y: auto; }
+
 </style>
 </head>
 <body>
   <a class="skip" href="#main">本文へ移動</a>
 
   <header class="topbar">
-    <div class="brand" data-logo><span data-store>高島屋 子供服・おもちゃ売り場</span></div>
+    <div class="brand" data-logo><span data-store>子供服・おもちゃ売り場</span></div>
     <span class="brand-period" data-period hidden></span>
   </header>
 
@@ -555,6 +582,8 @@ body.cam-open .toast { bottom: calc(env(safe-area-inset-bottom, 0px) + 260px); }
       <h2 class="h2 album-title">思い出アルバム</h2>
       <ul id="stamp-grid" class="album"></ul>
       <p class="desc center">スタンプは売り場のQRを読むと押されるよ（1日1こ）</p>
+
+      <section id="acct-card" class="acct-card" aria-live="polite"></section>
     </section>
   </main>
 
@@ -668,10 +697,15 @@ body.cam-open .toast { bottom: calc(env(safe-area-inset-bottom, 0px) + 260px); }
     </div>
   </div>
 
+  <!-- ===== アカウント ===== -->
+  <div id="acct-sheet" class="modal" hidden role="dialog" aria-modal="true" aria-label="アカウント">
+    <div class="modal-sheet"><div id="acct-body"></div></div>
+  </div>
+
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
 <!-- ============================================================
-     ★設定はここ（スタンプラリー・QRの合言葉・公式素材・コラボ）
+     ★設定はここ（スタンプラリー・QRの合言葉・アカウント・公式素材・コラボ）
      このブロックの中だけ書きかえればOKです
      ============================================================ -->
 <script id="nrl-config">
@@ -682,7 +716,7 @@ body.cam-open .toast { bottom: calc(env(safe-area-inset-bottom, 0px) + 260px); }
 window.NRL_CONFIG = {
   eventName: '近未来なりきりランド',
   eventNameEn: 'Kinmirai Narikiri Land',
-  storeLabel: '高島屋 子供服・おもちゃ売り場',   // ヘッダーと写真のフチに表示
+  storeLabel: '子供服・おもちゃ売り場',   // ヘッダーと写真のフチに表示
   hashtag: '#近未来なりきりランド',
   period: '',                                    // 例: '2026.11.1 ― 12.25'（空なら非表示）
 
@@ -690,7 +724,7 @@ window.NRL_CONFIG = {
   // 空のままなら qr.html を開いたページのURLを自動で使います
   baseUrl: '',
 
-  // 高島屋の公式ロゴ画像（許諾を得た素材を assets/ に置いてください）。無ければ文字表示
+  // 公式ロゴ画像（許諾を得た素材を assets/ に置いてください）。無ければ文字表示
   logoImage: 'assets/logo.png',
 
   storageKey: 'nrl-halloween-v1',
@@ -720,6 +754,24 @@ window.NRL_CONFIG = {
   ],
 
   /* ==========================================================
+     アカウント（記録をサーバーに保存して、スマホを変えても引きつげる）
+     Firebase（Google の無料枠あり）の設定を入れると使えるようになります。
+     空のままなら、記録はお客さまのスマホのブラウザにだけ保存されます。
+     手順は README.md の「アカウント機能の設定」を見てください。
+     ========================================================== */
+  account: {
+    firebase: {
+      apiKey: '',
+      authDomain: '',
+      projectId: '',
+      storageBucket: '',
+      appId: ''
+    },
+    syncPhotos: true,     // 思い出写真もサーバーに保存する（false でスタンプ記録のみ）
+    privacyUrl: ''        // 個人情報の取り扱いページのURL（あればフォームにリンクを表示）
+  },
+
+  /* ==========================================================
      コラボ限定（購入者限定）
      有名キャラクターとのコラボ衣装・フレーム・スタンプは、権利者から許諾を受けた
      公式画像（背景透過PNG）を assets/collab/ に置くと表示されます。
@@ -744,9 +796,9 @@ window.NRL_CONFIG = {
   },
 
   /* ==========================================================
-     高島屋公式キャラクター（ローズちゃん）の素材
+     公式キャラクター（ローズちゃん）の素材
      公式キャラクターはこのサイトでは描いていません。
-     高島屋さまから提供された「背景透過PNG」を assets/ に置くと自動で有効になります。
+     提供された「背景透過PNG」を assets/ に置くと自動で有効になります。
      ファイルが無いものは画面に出ません。
      ========================================================== */
 
@@ -1959,7 +2011,7 @@ window.NRL_CONFIG = {
     },
     {
       id: 'rose-garden', name: 'ローズガーデンのお姫さま', icon: 'rose', cat: 'special', lock: 'visit1',
-      motif: '高島屋のバラをイメージしたオリジナル', particles: 'petal', filter: 'glow',
+      motif: 'バラをイメージしたオリジナル', particles: 'petal', filter: 'glow',
       draw(ctx, g, t) {
         P.gown(ctx, g, { c1: '#FFE1EB', c2: '#C8325E', bodice: '#E0457B', pattern: 'rose', flare: 1.4, sleeves: '#FFD6E4', brooch: 'rose' });
         P.roseCrown(ctx, g);
@@ -2662,7 +2714,10 @@ window.NRL_CONFIG = {
     try { const d = JSON.parse(localStorage.getItem(CFG.storageKey)); if (d && d.visits) return d; } catch (e) { /* noop */ }
     return { visits: {}, purchase: null, candy: null };
   }
-  function save() { try { localStorage.setItem(CFG.storageKey, JSON.stringify(data)); } catch (e) { /* noop */ } }
+  function save(fromSync) {
+    try { localStorage.setItem(CFG.storageKey, JSON.stringify(data)); } catch (e) { /* noop */ }
+    if (!fromSync && window.NRL_Account) window.NRL_Account.onLocalChange();
+  }
   let data = load();
 
   const pad = (n) => String(n).padStart(2, '0');
@@ -2732,6 +2787,7 @@ window.NRL_CONFIG = {
       photoURL[key] = URL.createObjectURL(small);
       data.visits[key].photo = true; save();
       renderStamps();
+      if (window.NRL_Account) window.NRL_Account.onPhoto(key, small);
       return true;
     } catch (e) {
       toast('写真を保存できませんでした。スマホの空き容量を確認してください');
@@ -3240,13 +3296,20 @@ window.NRL_CONFIG = {
     $('#btn-memory').hidden = album;
     $('#btn-again').textContent = album ? 'とじる' : 'もう一回撮る';
     $('#preview-title').textContent = album ? `${dayLabel(previewKey)}の思い出` : '';
-    if (previewUrl) URL.revokeObjectURL(previewUrl);
+    if (previewUrl && previewUrl.startsWith('blob:')) URL.revokeObjectURL(previewUrl);
     previewUrl = URL.createObjectURL(blob);
     $('#preview-img').src = previewUrl;
     const p = $('#preview'); p.hidden = false;
     const canShare = !!(navigator.canShare && navigator.canShare({ files: [new File([blob], 'x.jpg', { type: 'image/jpeg' })] }));
     $('#btn-share').hidden = !canShare;
     $('#preview-hint').textContent = canShare ? '「保存・シェア」で写真アプリに保存できるよ' : '保存できないときは、写真を長押ししてね';
+  }
+  function openPreviewURL(url, key) {
+    openPreview(new Blob([]), { mode: 'album', key });
+    $('#preview-img').src = url;
+    previewUrl = url;
+    $('#btn-share').hidden = true;
+    $('#preview-hint').textContent = '保存するときは、写真を長押ししてね';
   }
   function fileName() { const d = new Date(); return `narikiri-${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}-${d.getHours()}${d.getMinutes()}${d.getSeconds()}.jpg`; }
   async function sharePhoto() {
@@ -3321,7 +3384,12 @@ window.NRL_CONFIG = {
   document.addEventListener('click', async (e) => {
     const m = e.target.closest('[data-memory]');
     if (m) {
-      try { const b = await photoDB.get(m.dataset.memory); if (b) openPreview(b, { mode: 'album', key: m.dataset.memory }); } catch (err) { toast('写真を開けませんでした'); }
+      const k = m.dataset.memory;
+      let b = null;
+      try { b = await photoDB.get(k); } catch (err) { /* noop */ }
+      if (b) openPreview(b, { mode: 'album', key: k });
+      else if (photoURL[k]) openPreviewURL(photoURL[k], k);
+      else toast('写真を開けませんでした');
     }
     if (e.target.closest('[data-collab-info]')) toast('お買い上げのお客さまにレジでお渡しするQRで使えるようになります');
   });
@@ -3355,6 +3423,345 @@ window.NRL_CONFIG = {
   renderAll();
   loadMemories();
   handleQuery();
+
+  /* ---------- アカウント連携用の窓口 ---------- */
+  window.NRL_App = {
+    getData: () => JSON.parse(JSON.stringify(data)),
+    setData(d) { data = { visits: d.visits || {}, purchase: d.purchase || null, candy: d.candy || null }; save(true); renderAll(); },
+    clearLocal: async () => {
+      data = { visits: {}, purchase: null, candy: null }; save(true);
+      try { await photoDB.clear(); } catch (e) { /* noop */ }
+      Object.keys(photoURL).forEach((k) => { if (photoURL[k].startsWith('blob:')) URL.revokeObjectURL(photoURL[k]); delete photoURL[k]; });
+      renderAll();
+    },
+    hasLocalPhoto: async (k) => { try { return !!(await photoDB.get(k)); } catch (e) { return false; } },
+    getLocalPhoto: async (k) => { try { return await photoDB.get(k); } catch (e) { return null; } },
+    putLocalPhoto: async (k, blob) => {
+      try { await photoDB.put(k, blob); } catch (e) { /* noop */ }
+      if (photoURL[k] && photoURL[k].startsWith('blob:')) URL.revokeObjectURL(photoURL[k]);
+      photoURL[k] = URL.createObjectURL(blob); renderStamps();
+    },
+    setRemotePhotoURL: (k, url) => { if (!photoURL[k]) { photoURL[k] = url; renderStamps(); } },
+    toast, modal, dayLabel
+  };
+  document.dispatchEvent(new Event('nrl-app-ready'));
+})();
+
+</script>
+<script>
+/* ==========================================================
+   アカウント：登録・ログイン・ログアウト・削除と、記録の同期
+   ・config.js の account.firebase を入れると有効になります
+   ・未設定なら、記録はこのスマホのブラウザにだけ保存されます
+   ========================================================== */
+(function () {
+  'use strict';
+  const CFG = window.NRL_CONFIG;
+  const AC = CFG.account || {};
+  const FB_VER = '10.12.2';
+  const $ = (s, el = document) => el.querySelector(s);
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const photoOn = AC.syncPhotos !== false;
+
+  /* ---------- Firebase ---------- */
+  function firebaseBackend(conf) {
+    let A, F, S, auth, db, st;
+    const base = `https://www.gstatic.com/firebasejs/${FB_VER}/`;
+    async function ready() {
+      if (auth) return;
+      const [app, a, f, s] = await Promise.all(['firebase-app.js', 'firebase-auth.js', 'firebase-firestore.js', 'firebase-storage.js'].map((x) => import(base + x)));
+      const fa = app.initializeApp(conf);
+      A = a; F = f; S = s;
+      auth = a.getAuth(fa); db = f.getFirestore(fa); st = s.getStorage(fa);
+    }
+    const pref = (uid, k) => S.ref(st, `users/${uid}/photos/${k}.jpg`);
+    return {
+      demo: false,
+      async init(cb) { await ready(); A.onAuthStateChanged(auth, (u) => cb(u ? { uid: u.uid, email: u.email } : null)); },
+      async signUp(e, p) { await ready(); await A.createUserWithEmailAndPassword(auth, e, p); },
+      async signIn(e, p) { await ready(); await A.signInWithEmailAndPassword(auth, e, p); },
+      async signOut() { await A.signOut(auth); },
+      async reset(e) { await ready(); await A.sendPasswordResetEmail(auth, e); },
+      async reauth(p) { const u = auth.currentUser; await A.reauthenticateWithCredential(u, A.EmailAuthProvider.credential(u.email, p)); },
+      async deleteUser() { await A.deleteUser(auth.currentUser); },
+      async load(uid) { const snap = await F.getDoc(F.doc(db, 'users', uid)); return snap.exists() ? snap.data() : null; },
+      async save(uid, d) { await F.setDoc(F.doc(db, 'users', uid), { visits: d.visits || {}, purchase: d.purchase || null, candy: d.candy || null, updatedAt: Date.now() }); },
+      async removeData(uid) { await F.deleteDoc(F.doc(db, 'users', uid)); },
+      async putPhoto(uid, k, blob) { await S.uploadBytes(pref(uid, k), blob, { contentType: 'image/jpeg' }); },
+      async getPhoto(uid, k) {
+        try { return { blob: await S.getBlob(pref(uid, k)) }; } catch (e) {
+          try { return { url: await S.getDownloadURL(pref(uid, k)) }; } catch (e2) { return null; }
+        }
+      },
+      async delPhoto(uid, k) { try { await S.deleteObject(pref(uid, k)); } catch (e) { /* noop */ } }
+    };
+  }
+
+  /* ---------- プレビュー用のお試し（この端末の中だけで動く） ---------- */
+  function demoBackend() {
+    const K = 'nrl-demo-account';
+    const get = () => { try { return JSON.parse(localStorage.getItem(K)) || { users: {}, cur: null, data: {}, photos: {} }; } catch (e) { return { users: {}, cur: null, data: {}, photos: {} }; } };
+    const set = (d) => localStorage.setItem(K, JSON.stringify(d));
+    const wait = () => new Promise((r) => setTimeout(r, 450));
+    const err = (code) => { const e = new Error(code); e.code = code; return e; };
+    let cb = null;
+    const fire = () => { const d = get(); cb && cb(d.cur && d.users[d.cur] ? { uid: d.users[d.cur].uid, email: d.cur } : null); };
+    const toDataURL = (b) => new Promise((r) => { const fr = new FileReader(); fr.onload = () => r(fr.result); fr.readAsDataURL(b); });
+    const toBlob = async (u) => (await fetch(u)).blob();
+    return {
+      demo: true,
+      async init(c) { cb = c; fire(); },
+      async signUp(e, p) {
+        await wait(); const d = get();
+        if (!/^\S+@\S+\.\S+$/.test(e)) throw err('auth/invalid-email');
+        if (p.length < 6) throw err('auth/weak-password');
+        if (d.users[e]) throw err('auth/email-already-in-use');
+        d.users[e] = { pw: p, uid: 'demo-' + Date.now() }; d.cur = e; set(d); fire();
+      },
+      async signIn(e, p) { await wait(); const d = get(); if (!d.users[e] || d.users[e].pw !== p) throw err('auth/invalid-credential'); d.cur = e; set(d); fire(); },
+      async signOut() { const d = get(); d.cur = null; set(d); fire(); },
+      async reset() { await wait(); },
+      async reauth(p) { await wait(); const d = get(); if (!d.cur || d.users[d.cur].pw !== p) throw err('auth/invalid-credential'); },
+      async deleteUser() { const d = get(); delete d.users[d.cur]; d.cur = null; set(d); fire(); },
+      async load(uid) { return get().data[uid] || null; },
+      async save(uid, v) { const d = get(); d.data[uid] = v; set(d); },
+      async removeData(uid) { const d = get(); delete d.data[uid]; Object.keys(d.photos).forEach((k) => { if (k.startsWith(uid + '/')) delete d.photos[k]; }); set(d); },
+      async putPhoto(uid, k, b) { const d = get(); d.photos[`${uid}/${k}`] = await toDataURL(b); try { set(d); } catch (e) { /* 容量オーバーは無視 */ } },
+      async getPhoto(uid, k) { const u = get().photos[`${uid}/${k}`]; return u ? { blob: await toBlob(u) } : null; },
+      async delPhoto(uid, k) { const d = get(); delete d.photos[`${uid}/${k}`]; set(d); }
+    };
+  }
+
+  const fb = AC.firebase || {};
+  const backend = window.NRL_ACCOUNT_DEMO ? demoBackend() : (fb.apiKey && fb.projectId ? firebaseBackend(fb) : null);
+
+  /* ---------- 状態 ---------- */
+  let App = null;
+  let user = null;
+  let status = '';
+  let pushTimer = null;
+  let syncing = false;
+
+  function merge(a, b) {
+    const v = Object.assign({}, b.visits || {});
+    Object.entries(a.visits || {}).forEach(([k, x]) => {
+      const y = v[k];
+      v[k] = y ? { t: Math.min(x.t || Infinity, y.t || Infinity), spot: y.spot || x.spot, photo: !!(x.photo || y.photo) } : x;
+    });
+    const min = (p, q) => (p && q ? Math.min(p, q) : p || q || null);
+    return { visits: v, purchase: min(a.purchase, b.purchase), candy: min(a.candy, b.candy) };
+  }
+  function setStatus(t) { status = t; const el = $('#acct-status'); if (el) el.textContent = t; }
+
+  async function syncDown() {
+    if (!user) return;
+    syncing = true; setStatus('記録を読みこみ中…');
+    try {
+      const uid = user.uid;
+      const local = App.getData();
+      const remote = (await backend.load(uid)) || { visits: {} };
+      const merged = merge(local, remote);
+      App.setData(merged);
+      await backend.save(uid, merged);
+      if (photoOn) {
+        for (const k of Object.keys(merged.visits)) {
+          const lp = !!(local.visits[k] && local.visits[k].photo) && (await App.hasLocalPhoto(k));
+          const rp = !!(remote.visits && remote.visits[k] && remote.visits[k].photo);
+          if (lp && !rp) { const b = await App.getLocalPhoto(k); if (b) await backend.putPhoto(uid, k, b); }
+          else if (rp && !lp) {
+            const r = await backend.getPhoto(uid, k);
+            if (r && r.blob) await App.putLocalPhoto(k, r.blob);
+            else if (r && r.url) App.setRemotePhotoURL(k, r.url);
+          }
+        }
+      }
+      setStatus('アカウントに保存ずみ');
+    } catch (e) {
+      console.warn(e); setStatus('通信できませんでした。あとでもう一度ひらいてください');
+    }
+    syncing = false;
+  }
+  async function pushNow() {
+    clearTimeout(pushTimer); pushTimer = null;
+    if (!user || !backend) return;
+    try { await backend.save(user.uid, App.getData()); setStatus('アカウントに保存ずみ'); } catch (e) { setStatus('保存できませんでした。通信できる場所でひらいてください'); }
+  }
+
+  /* ---------- 画面 ---------- */
+  function renderCard() {
+    const el = $('#acct-card');
+    if (!el) return;
+    if (!backend) {
+      el.innerHTML = `<h2 class="acct-title">記録の保存について</h2>
+        <p class="acct-text">スタンプと写真はこのスマホに保存されます。次に来たときも、同じスマホ・同じブラウザでひらけば続きからあそべます。</p>`;
+      return;
+    }
+    if (user) {
+      el.innerHTML = `<h2 class="acct-title">アカウント</h2>
+        <p class="acct-user"><span>ログイン中</span><b>${esc(user.email || '')}</b></p>
+        <p id="acct-status" class="acct-status">${esc(status)}</p>
+        <div class="acct-actions">
+          <button class="btn btn-pop btn-paper btn-small" data-acct="logout">ログアウト</button>
+          <button class="btn btn-text btn-small acct-danger" data-acct="delete">アカウントを削除</button>
+        </div>
+        ${backend.demo ? '<p class="acct-demo">プレビュー用のお試しアカウントです（この端末の中だけに保存）</p>' : ''}`;
+    } else {
+      el.innerHTML = `<h2 class="acct-title">アカウント</h2>
+        <p class="acct-text">アカウントをつくると、スマホを変えてもスタンプと思い出写真を引きつげます。登録も削除も自由です。</p>
+        <div class="acct-actions">
+          <button class="btn btn-pop btn-small" data-acct="signup">アカウント登録</button>
+          <button class="btn btn-pop btn-paper btn-small" data-acct="login">ログイン</button>
+        </div>
+        <p class="acct-note">保護者の方が登録してください</p>
+        ${backend.demo ? '<p class="acct-demo">プレビュー用のお試しアカウントです（この端末の中だけに保存）</p>' : ''}`;
+    }
+  }
+
+  const ERR = {
+    'auth/email-already-in-use': 'このメールアドレスはすでに登録されています。ログインしてください',
+    'auth/invalid-email': 'メールアドレスの形がちがうようです',
+    'auth/weak-password': 'パスワードは6文字以上にしてください',
+    'auth/invalid-credential': 'メールアドレスかパスワードがちがいます',
+    'auth/wrong-password': 'パスワードがちがいます',
+    'auth/user-not-found': 'このメールアドレスのアカウントは見つかりませんでした',
+    'auth/too-many-requests': '何度も失敗したため、しばらく時間をおいてからためしてください',
+    'auth/network-request-failed': '通信できませんでした。電波のよい場所でためしてください',
+    'auth/requires-recent-login': 'もう一度ログインしてからためしてください'
+  };
+  const errMsg = (e) => ERR[e && e.code] || 'うまくいきませんでした。時間をおいてもう一度ためしてください';
+
+  function sheet(mode) {
+    const m = $('#acct-sheet');
+    const priv = AC.privacyUrl ? `<a href="${esc(AC.privacyUrl)}" target="_blank" rel="noopener">個人情報の取り扱い</a>を読んで、` : '';
+    const forms = {
+      signup: `<h2 class="modal-title">アカウント登録</h2>
+        <p class="modal-text">いまこのスマホにある記録も、そのままアカウントに引きつがれます</p>
+        <label class="field"><span>メールアドレス</span><input type="email" name="email" autocomplete="email" inputmode="email" required></label>
+        <label class="field"><span>パスワード（6文字以上）</span><input type="password" name="pw" autocomplete="new-password" minlength="6" required></label>
+        <label class="check"><input type="checkbox" name="agree"><span>${priv}スタンプの記録${photoOn ? 'と思い出写真' : ''}をサーバーに保存することに同意します（アカウント削除でいつでも消せます）</span></label>`,
+      login: `<h2 class="modal-title">ログイン</h2>
+        <p class="modal-text">このスマホの記録とアカウントの記録をあわせます</p>
+        <label class="field"><span>メールアドレス</span><input type="email" name="email" autocomplete="email" inputmode="email" required></label>
+        <label class="field"><span>パスワード</span><input type="password" name="pw" autocomplete="current-password" required></label>`,
+      reset: `<h2 class="modal-title">パスワードの再設定</h2>
+        <p class="modal-text">登録したメールアドレスに、再設定のメールを送ります</p>
+        <label class="field"><span>メールアドレス</span><input type="email" name="email" autocomplete="email" inputmode="email" required></label>`,
+      delete: `<h2 class="modal-title">アカウントを削除</h2>
+        <p class="modal-text">アカウントと、保存したスタンプの記録${photoOn ? '・思い出写真' : ''}がすべて消えます。このスマホの記録も消えます。もとに戻せません。</p>
+        <label class="field"><span>確認のためパスワードを入力</span><input type="password" name="pw" autocomplete="current-password" required></label>`
+    };
+    const submit = { signup: '登録する', login: 'ログインする', reset: 'メールを送る', delete: '削除する' }[mode];
+    const sw = {
+      signup: '<button type="button" data-acct-mode="login">アカウントをお持ちの方はログイン</button>',
+      login: '<button type="button" data-acct-mode="signup">はじめての方はアカウント登録</button><button type="button" data-acct-mode="reset">パスワードを忘れた</button>',
+      reset: '<button type="button" data-acct-mode="login">ログインにもどる</button>',
+      delete: ''
+    }[mode];
+    $('#acct-body').innerHTML = `<form class="acct-form" data-mode="${mode}" novalidate>
+      ${forms[mode]}
+      <p class="form-err" role="alert"></p>
+      <div class="modal-actions">
+        <button type="submit" class="btn btn-pop ${mode === 'delete' ? 'btn-danger' : ''}">${submit}</button>
+        <button type="button" class="btn btn-pop btn-paper" data-acct-close>やめる</button>
+      </div>
+      ${sw ? `<p class="form-switch">${sw}</p>` : ''}
+    </form>`;
+    m.hidden = false;
+    requestAnimationFrame(() => m.classList.add('is-open'));
+    const first = m.querySelector('input'); if (first) setTimeout(() => first.focus(), 250);
+  }
+  function closeSheet() { const m = $('#acct-sheet'); m.classList.remove('is-open'); setTimeout(() => { m.hidden = true; }, 200); }
+
+  async function onSubmit(form) {
+    const mode = form.dataset.mode;
+    const email = (form.email && form.email.value || '').trim();
+    const pw = form.pw ? form.pw.value : '';
+    const errEl = form.querySelector('.form-err');
+    const btn = form.querySelector('[type="submit"]');
+    const fail = (t) => { errEl.textContent = t; btn.disabled = false; btn.textContent = label; };
+    const label = btn.textContent;
+    errEl.textContent = '';
+    if (mode !== 'delete' && !email) return fail('メールアドレスを入力してください');
+    if (mode !== 'reset' && !pw) return fail('パスワードを入力してください');
+    if (mode === 'signup' && !form.agree.checked) return fail('保存への同意にチェックを入れてください');
+    btn.disabled = true; btn.textContent = '通信中…';
+    try {
+      if (mode === 'signup') { await backend.signUp(email, pw); closeSheet(); App.toast('アカウントを作りました'); }
+      if (mode === 'login') { await backend.signIn(email, pw); closeSheet(); App.toast('ログインしました'); }
+      if (mode === 'reset') { await backend.reset(email); closeSheet(); App.toast('再設定のメールを送りました'); }
+      if (mode === 'delete') {
+        await backend.reauth(pw);
+        const uid = user.uid;
+        const days = Object.keys(App.getData().visits || {});
+        clearTimeout(pushTimer); pushTimer = null;
+        if (photoOn) for (const k of days) await backend.delPhoto(uid, k);
+        await backend.removeData(uid);
+        user = null;
+        await backend.deleteUser();
+        await App.clearLocal();
+        closeSheet(); renderCard();
+        App.toast('アカウントを削除しました');
+      }
+    } catch (e) {
+      fail(errMsg(e));
+    }
+  }
+
+  function logout() {
+    App.modal('<h2 class="modal-title">ログアウトしますか？</h2><p class="modal-text">このスマホからは記録が消えますが、アカウントには残っています。次はログインすると続きからあそべます。</p>', [
+      {
+        label: 'ログアウトする', primary: true, onClick: async () => {
+          await pushNow();
+          const u = user; user = null;
+          try { await backend.signOut(); } catch (e) { /* noop */ }
+          if (u) await App.clearLocal();
+          renderCard(); App.toast('ログアウトしました');
+        }
+      },
+      { label: 'やめる' }
+    ]);
+  }
+
+  /* ---------- 起動 ---------- */
+  async function start() {
+    App = window.NRL_App;
+    renderCard();
+    document.addEventListener('click', (e) => {
+      const t = e.target.closest('[data-acct], [data-acct-mode], [data-acct-close]');
+      if (!t) { if (e.target.id === 'acct-sheet') closeSheet(); return; }
+      if (t.dataset.acctClose !== undefined) { closeSheet(); return; }
+      if (t.dataset.acctMode) { sheet(t.dataset.acctMode); return; }
+      const a = t.dataset.acct;
+      if (a === 'signup' || a === 'login' || a === 'delete') sheet(a);
+      if (a === 'logout') logout();
+    });
+    document.addEventListener('submit', (e) => {
+      const f = e.target.closest('.acct-form');
+      if (!f) return;
+      e.preventDefault(); onSubmit(f);
+    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('#acct-sheet').hidden) closeSheet(); });
+    if (!backend) return;
+    try {
+      await backend.init(async (u) => {
+        const prev = user;
+        user = u;
+        renderCard();
+        if (u && (!prev || prev.uid !== u.uid)) { await syncDown(); renderCard(); }
+      });
+    } catch (e) {
+      console.warn('account init failed', e);
+    }
+  }
+
+  window.NRL_Account = {
+    onLocalChange() { if (!user || !backend || syncing) return; setStatus('保存中…'); clearTimeout(pushTimer); pushTimer = setTimeout(pushNow, 800); },
+    async onPhoto(k, blob) {
+      if (!user || !backend || !photoOn) return;
+      try { await backend.putPhoto(user.uid, k, blob); await pushNow(); } catch (e) { setStatus('写真を保存できませんでした。通信できる場所でひらいてください'); }
+    }
+  };
+  if (window.NRL_App) start(); else document.addEventListener('nrl-app-ready', start, { once: true });
 })();
 
 </script>
