@@ -761,13 +761,13 @@ window.NRL_CONFIG = {
      ========================================================== */
   account: {
     firebase: {
-      apiKey: '',
-      authDomain: '',
-      projectId: '',
-      storageBucket: '',
-      appId: ''
+      apiKey: 'AIzaSyAfVREm9-bi5Ycp3NcQJDZGCeUeXeOJb-8',
+      authDomain: 'narikiri.firebaseapp.com',
+      projectId: 'narikiri',
+      storageBucket: 'narikiri.firebasestorage.app',
+      appId: '1:429815673406:web:087646450a1808ab7a976f'
     },
-    syncPhotos: true,     // 思い出写真もサーバーに保存する（false でスタンプ記録のみ）
+    syncPhotos: false,    // 思い出写真もサーバーに保存する場合は true（Firebaseの有料プラン「Blaze」が必要）
     privacyUrl: ''        // 個人情報の取り扱いページのURL（あればフォームにリンクを表示）
   },
 
@@ -3577,7 +3577,7 @@ window.NRL_CONFIG = {
       }
       setStatus('アカウントに保存ずみ');
     } catch (e) {
-      console.warn(e); setStatus('通信できませんでした。あとでもう一度ひらいてください');
+      console.warn(e); setStatus(e && e.code === 'permission-denied' ? ERR['permission-denied'] : '通信できませんでした。あとでもう一度ひらいてください');
     }
     syncing = false;
   }
@@ -3607,7 +3607,7 @@ window.NRL_CONFIG = {
         ${backend.demo ? '<p class="acct-demo">プレビュー用のお試しアカウントです（この端末の中だけに保存）</p>' : ''}`;
     } else {
       el.innerHTML = `<h2 class="acct-title">アカウント</h2>
-        <p class="acct-text">アカウントをつくると、スマホを変えてもスタンプと思い出写真を引きつげます。登録も削除も自由です。</p>
+        <p class="acct-text">アカウントをつくると、スマホを変えても${photoOn ? 'スタンプと思い出写真' : 'スタンプの記録'}を引きつげます。登録も削除も自由です。${photoOn ? '' : '（思い出写真はこのスマホに残ります）'}</p>
         <div class="acct-actions">
           <button class="btn btn-pop btn-small" data-acct="signup">アカウント登録</button>
           <button class="btn btn-pop btn-paper btn-small" data-acct="login">ログイン</button>
@@ -3626,9 +3626,17 @@ window.NRL_CONFIG = {
     'auth/user-not-found': 'このメールアドレスのアカウントは見つかりませんでした',
     'auth/too-many-requests': '何度も失敗したため、しばらく時間をおいてからためしてください',
     'auth/network-request-failed': '通信できませんでした。電波のよい場所でためしてください',
-    'auth/requires-recent-login': 'もう一度ログインしてからためしてください'
+    'auth/requires-recent-login': 'もう一度ログインしてからためしてください',
+    'auth/api-key-not-valid.-please-pass-a-valid-api-key.': 'サイトの設定に誤りがあります（apiKey）。管理者にお知らせください',
+    'auth/operation-not-allowed': 'メールアドレスでの登録が有効になっていません（管理者の設定が必要です）',
+    'permission-denied': 'データベースの設定が終わっていません（管理者の設定が必要です）'
   };
-  const errMsg = (e) => ERR[e && e.code] || 'うまくいきませんでした。時間をおいてもう一度ためしてください';
+  const errMsg = (e) => {
+    const c = (e && e.code) || '';
+    if (ERR[c]) return ERR[c];
+    if (c.indexOf('api-key') >= 0) return ERR['auth/api-key-not-valid.-please-pass-a-valid-api-key.'];
+    return 'うまくいきませんでした。時間をおいてもう一度ためしてください';
+  };
 
   function sheet(mode) {
     const m = $('#acct-sheet');
