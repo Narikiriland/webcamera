@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>近未来なりきりランド｜なりきりカメラ＆スタンプラリー</title>
+  <meta name="description" content="円の中に立ったら、おうちの人がパチリ！プリンセスにもヒーローにもなれるよ。ハロウィンスタンプラリーで3回来るとお菓子のプレゼント。">
+  <meta name="theme-color" content="#FFF5F9">
+  <meta property="og:title" content="近未来なりきりランド">
+  <meta property="og:description" content="なりきりカメラ＆デジタルスタンプラリー">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Yusei+Magic&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">本文へ移動</a>
+
+  <header class="topbar">
+    <div class="brand" data-logo><span data-store>高島屋 子供服・おもちゃ売り場</span></div>
+    <span class="brand-period" data-period hidden></span>
+  </header>
+
+  <main id="main">
+    <!-- ===== ホーム ===== -->
+    <section id="view-home" class="view is-active" aria-labelledby="hero-title">
+      <div class="hero">
+        <div class="hero-art">
+          <div class="stage-circle" aria-hidden="true"></div>
+          <span class="stk s1" data-art="crown" aria-hidden="true"></span>
+          <span class="stk s2" data-art="rocket" aria-hidden="true"></span>
+          <span class="stk s3" data-art="pumpkin" aria-hidden="true"></span>
+          <span class="stk s4" data-art="tiara" aria-hidden="true"></span>
+          <span class="stk s5" data-art="ghost" aria-hidden="true"></span>
+          <span class="stk s6" data-art="cat" aria-hidden="true"></span>
+          <span class="stk s7" data-art="witch" aria-hidden="true"></span>
+          <span class="stk s8" data-art="rose" aria-hidden="true"></span>
+          <h1 id="hero-title" class="title">
+            <span class="t-tag">近未来</span>
+            <span class="t-main">なりきり</span>
+            <span class="t-sub">ランド</span>
+          </h1>
+        </div>
+        <p class="lead">
+          <span class="line">円の中に立ったら、おうちの人がパチリ！</span>
+          <span class="line">プリンセスにもヒーローにもなれるよ</span>
+        </p>
+        <div class="cta">
+          <button class="btn btn-pop btn-big" data-open="camera">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path fill="currentColor" d="M9 4 7.2 6H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-3.2L15 4H9Zm3 5a4 4 0 1 1 0 8 4 4 0 0 1 0-8Z"/></svg>
+            なりきりカメラであそぶ
+          </button>
+          <label class="btn btn-pop btn-paper">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path fill="currentColor" d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm0 14h14l-4.5-6-3.5 4.5-2.5-3Z"/></svg>
+            写真をえらんでしあげる
+            <input id="file-pick" class="sr-only" type="file" accept="image/*">
+          </label>
+        </div>
+        <p class="hero-note">写真はスマホの中だけで処理されます</p>
+      </div>
+
+      <a class="ticket" href="#stamps" data-view="stamps">
+        <span class="tk-main">
+          <b class="tk-title" data-rally-name>ハロウィンスタンプラリー</b>
+          <span class="tk-sub"><span data-stamp-total>3</span>回来て<span data-prize>お菓子</span>をもらおう</span>
+          <span id="tk-dots" class="tk-dots" aria-hidden="true"></span>
+        </span>
+        <span class="tk-count"><b data-stamp-count>0</b><small>/<span data-stamp-total>3</span></small></span>
+      </a>
+
+      <section class="block" aria-labelledby="howto-title">
+        <h2 id="howto-title" class="h2">あそびかた</h2>
+        <ol class="steps">
+          <li><span class="n">1</span><span class="art" data-art="stage"></span><span class="txt"><b>円の中に立つ</b><span>足の先までうつると、ドレスがきれいだよ</span></span></li>
+          <li><span class="n">2</span><span class="art" data-art="tiara"></span><span class="txt"><b>衣装をえらぶ</b><span>なりたい姿をタップしてね</span></span></li>
+          <li><span class="n">3</span><span class="art" data-art="sparkle"></span><span class="txt"><b>さつえい＆しあげ</b><span>スタンプやフレームでかわいくしあげよう</span></span></li>
+          <li><span class="n">4</span><span class="art" data-art="pumpkin"></span><span class="txt"><b>スタンプをあつめる</b><span>売り場のQRで1日1こ。3回でお菓子のプレゼント</span></span></li>
+        </ol>
+      </section>
+
+      <section class="block" aria-labelledby="looks-title">
+        <h2 id="looks-title" class="h2">なりきれる衣装</h2>
+        <p class="desc">タップするとカメラがひらくよ</p>
+        <ul id="gallery" class="gallery"></ul>
+      </section>
+
+      <section class="block deco-promo" aria-labelledby="deco-title">
+        <div class="deco-art" aria-hidden="true">
+          <span data-sticker-art="neko"></span><span data-sticker-art="heart-glasses"></span><span data-sticker-art="flower"></span><span data-sticker-art="daisuki"></span>
+        </div>
+        <h2 id="deco-title" class="h2">写真をしあげよう</h2>
+        <p class="desc"><span class="line">撮った写真や写真フォルダの写真に</span><span class="line">スタンプとフレームをつけられるよ</span></p>
+        <label class="btn btn-pop btn-paper">
+          写真をえらぶ
+          <input class="sr-only" type="file" accept="image/*" data-file-pick>
+        </label>
+      </section>
+
+      <section class="block notes" aria-labelledby="notes-title">
+        <h2 id="notes-title" class="h2 small">ご利用にあたって</h2>
+        <ul>
+          <li>撮影のときは、まわりのお客さまが写りこまないようご配慮ください。</li>
+          <li>売り場では走らず、足もとに気をつけてお楽しみください。</li>
+          <li>スタンプはこのスマホのブラウザに保存されます。別のブラウザでは引きつがれません。</li>
+          <li>LINEやInstagramから開いてカメラが動かないときは「ブラウザで開く」を選んでください。</li>
+        </ul>
+        <p class="tag" data-hashtag>#近未来なりきりランド</p>
+      </section>
+    </section>
+
+    <!-- ===== ハロウィンスタンプラリー＆思い出アルバム ===== -->
+    <section id="view-stamps" class="view" aria-labelledby="stamps-title">
+      <div class="rally">
+        <span class="rally-bat b1" data-art="bat" aria-hidden="true"></span>
+        <span class="rally-bat b2" data-art="ghost" aria-hidden="true"></span>
+        <span class="rally-moon" data-art="moon" aria-hidden="true"></span>
+        <h1 id="stamps-title" class="rally-title" data-rally-name>ハロウィンスタンプラリー</h1>
+        <p class="rally-lead"><span class="line">来た日ごとにスタンプ1こと</span><span class="line">お気に入り写真を1まい残そう</span></p>
+        <p class="rally-progress"><b data-stamp-count>0</b><small> / <span data-stamp-total>3</span></small></p>
+        <p class="rally-goal"><span data-stamp-total>3</span>回あつめると<span data-prize>お菓子</span>のプレゼント！</p>
+      </div>
+
+      <div id="complete-panel" class="complete" hidden>
+        <span class="complete-art" data-art="candy" aria-hidden="true"></span>
+        <h2 class="h2">クリアおめでとう！</h2>
+        <p id="complete-msg"></p>
+        <div class="complete-ticket">
+          <span>にんしょうコード</span>
+          <b id="complete-code">HW-0000</b>
+          <span id="complete-clock" aria-live="off"></span>
+        </div>
+        <p id="candy-status" class="candy-status"></p>
+        <button id="btn-candy" class="btn btn-pop btn-paper btn-small">スタッフ用：お渡しずみにする</button>
+        <button class="btn btn-pop btn-big" data-costume="golden-legend">ゴールドレジェンドで撮る</button>
+      </div>
+
+      <h2 class="h2 album-title">思い出アルバム</h2>
+      <ul id="stamp-grid" class="album"></ul>
+      <p class="desc center">スタンプは売り場のQRを読むと押されるよ（1日1こ）</p>
+    </section>
+  </main>
+
+  <nav class="tabbar" aria-label="メインメニュー">
+    <button data-view="home" aria-current="page">
+      <svg aria-hidden="true" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3 2 11h3v9h5v-6h4v6h5v-9h3L12 3Z"/></svg>
+      <span>ホーム</span>
+    </button>
+    <button class="tab-cam" data-open="camera" aria-label="なりきりカメラをひらく">
+      <svg aria-hidden="true" viewBox="0 0 24 24"><path fill="currentColor" d="M9 4 7.2 6H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-3.2L15 4H9Zm3 5a4 4 0 1 1 0 8 4 4 0 0 1 0-8Z"/></svg>
+    </button>
+    <button data-view="stamps" aria-current="false">
+      <svg aria-hidden="true" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a5 5 0 0 0-3 9v3H5a2 2 0 0 0-2 2v2h18v-2a2 2 0 0 0-2-2h-4v-3a5 5 0 0 0-3-9ZM4 20h16v2H4z"/></svg>
+      <span>スタンプ</span>
+    </button>
+  </nav>
+
+  <!-- ===== カメラ ===== -->
+  <div id="camera" class="camera" hidden role="dialog" aria-modal="true" aria-label="なりきりカメラ">
+    <video id="video" playsinline muted autoplay></video>
+    <canvas id="stage"></canvas>
+    <div class="guide" aria-hidden="true"><div class="guide-body"></div><p>お子さまの全身がうつるように<br>少しはなれて撮ってね</p></div>
+    <div id="flash" class="flash" aria-hidden="true"></div>
+    <div id="countdown" class="countdown" aria-live="assertive"></div>
+
+    <div class="cam-top">
+      <button id="btn-close" class="icon-btn" aria-label="カメラをとじる">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.3 5.7 12 12l6.3 6.3-1.4 1.4L10.6 13.4 4.3 19.7 2.9 18.3 9.2 12 2.9 5.7 4.3 4.3l6.3 6.3 6.3-6.3z"/></svg>
+      </button>
+      <p id="cam-status" class="cam-status" data-state="loading"><i aria-hidden="true"></i><span id="cam-status-text">AIを準備中…</span></p>
+      <button id="btn-timer" class="icon-btn" aria-pressed="true" aria-label="3秒タイマー">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 1h6v2H9zm3 3a9 9 0 1 0 9 9 9 9 0 0 0-9-9Zm1 9.4V8h-2v6.4l4.2 2.5 1-1.7Z"/></svg>
+      </button>
+    </div>
+
+    <div class="cam-bottom">
+      <p id="cam-costume-name" class="cam-name" aria-live="polite"></p>
+      <div class="cats" role="group" aria-label="衣装のしゅるい">
+        <button class="cat-chip" data-cat="all" aria-pressed="true">すべて</button>
+        <button class="cat-chip" data-cat="halloween" aria-pressed="false">ハロウィン</button>
+        <button class="cat-chip" data-cat="kids" aria-pressed="false">キッズ</button>
+        <button class="cat-chip" data-cat="teen" aria-pressed="false">映え</button>
+        <button class="cat-chip" data-cat="special" aria-pressed="false">スタンプ特典</button>
+        <button class="cat-chip" data-cat="collab" aria-pressed="false">コラボ</button>
+      </div>
+      <ul id="rail" class="rail" aria-label="衣装をえらぶ"></ul>
+      <div class="shutter-row">
+        <label class="icon-btn ghost" aria-label="写真フォルダからえらんでしあげる">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm0 14h14l-4.5-6-3.5 4.5-2.5-3Z"/></svg>
+          <input class="sr-only" type="file" accept="image/*" data-file-pick>
+        </label>
+        <button id="btn-shutter" class="shutter" aria-label="撮影する"><span></span></button>
+        <button id="btn-flip" class="icon-btn ghost" aria-label="カメラを切りかえる">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20 5h-3.2L15 3H9L7.2 5H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2Zm-8 13a5 5 0 0 1-4.9-4H5l3-3 3 3H9.2a3 3 0 0 0 5.4 1.2l1.4 1.4A5 5 0 0 1 12 18Zm4-4-3-3h1.8a3 3 0 0 0-5.4-1.2L8 8.4A5 5 0 0 1 16.9 11H19Z"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div id="cam-error" class="cam-error" hidden>
+      <p id="cam-error-text"></p>
+      <button id="btn-retry" class="btn btn-pop">もう一度ためす</button>
+    </div>
+  </div>
+
+  <!-- ===== 写真プレビュー ===== -->
+  <div id="preview" class="preview" hidden role="dialog" aria-modal="true" aria-label="撮った写真">
+    <p id="preview-title" class="preview-title"></p>
+    <img id="preview-img" alt="撮影したなりきり写真">
+    <p id="preview-hint" class="preview-hint"></p>
+    <div class="preview-actions">
+      <button id="btn-memory" class="btn btn-pop btn-orange">今日の思い出に登録</button>
+      <button id="btn-share" class="btn btn-pop">保存・シェア</button>
+      <button id="btn-deco" class="btn btn-pop btn-butter">スタンプでしあげる</button>
+      <button id="btn-download" class="btn btn-pop btn-paper">ダウンロード</button>
+      <button id="btn-again" class="btn btn-text">もう一回撮る</button>
+    </div>
+  </div>
+
+  <!-- ===== 写真デコ ===== -->
+  <div id="editor" class="editor" hidden role="dialog" aria-modal="true" aria-label="写真をしあげる">
+    <div class="ed-top">
+      <button id="ed-close" class="icon-btn light" aria-label="しあげをやめる">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.3 5.7 12 12l6.3 6.3-1.4 1.4L10.6 13.4 4.3 19.7 2.9 18.3 9.2 12 2.9 5.7 4.3 4.3l6.3 6.3 6.3-6.3z"/></svg>
+      </button>
+      <p class="ed-title">写真をしあげる</p>
+      <button id="ed-save" class="btn btn-pop btn-small">できた！</button>
+    </div>
+    <div id="ed-stage" class="ed-stage"><canvas id="ed-canvas"></canvas></div>
+    <div class="ed-bottom">
+      <p id="ed-hint" class="ed-hint">指1本でうごかす・2本で大きさと向き</p>
+      <div id="ed-tools" class="ed-tools" hidden>
+        <button data-tool="smaller">小さく</button>
+        <button data-tool="bigger">大きく</button>
+        <button data-tool="turn">くるっ</button>
+        <button data-tool="flip">はんてん</button>
+        <button data-tool="delete" class="danger">けす</button>
+      </div>
+      <div class="seg" role="tablist" aria-label="しあげのしゅるい">
+        <button role="tab" data-edtab="stickers" aria-selected="true">スタンプ</button>
+        <button role="tab" data-edtab="frames" aria-selected="false">フレーム</button>
+      </div>
+      <ul id="ed-tray" class="ed-tray"></ul>
+    </div>
+  </div>
+
+  <!-- ===== モーダル ===== -->
+  <div id="modal" class="modal" hidden role="dialog" aria-modal="true" aria-label="お知らせ">
+    <div class="modal-sheet">
+      <div id="modal-body"></div>
+      <div id="modal-actions" class="modal-actions"></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/art.js"></script>
+  <script src="js/costumes.js"></script>
+  <script src="js/editor.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

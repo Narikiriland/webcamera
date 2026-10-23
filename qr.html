@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>QRコード印刷シート｜近未来なりきりランド（スタッフ用）</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Yusei+Magic&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root { --rose:#E0457B; --night:#2A2550; --line:#E9DDE6; color-scheme: light; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Zen Maru Gothic", system-ui, sans-serif; color: var(--night); background: #F4EEF3; font-size: 16px; line-height: 1.7; }
+    .panel { max-width: 960px; margin: 0 auto; padding: 24px 20px; }
+    h1 { font-size: 24px; margin: 0 0 8px; }
+    .panel p { margin: 0 0 12px; }
+    label { display: block; font-weight: 700; margin-top: 12px; }
+    input { width: 100%; font: inherit; padding: 12px 14px; border: 2px solid var(--line); border-radius: 12px; }
+    input:focus-visible, button:focus-visible { outline: 3px solid #3FD6E0; outline-offset: 2px; }
+    .row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+    button { font: inherit; font-weight: 700; min-height: 48px; padding: 0 20px; border-radius: 999px; border: 0; background: var(--rose); color: #fff; cursor: pointer; }
+    button.sub { background: #fff; color: var(--rose); border: 2px solid var(--rose); }
+    .warn { padding: 12px 14px; border-radius: 12px; background: #FFF4D6; font-size: 14px; }
+    .links { font-size: 14px; background: #fff; border-radius: 12px; padding: 12px 16px; overflow-x: auto; }
+    .links a { color: var(--rose); word-break: break-all; }
+    .sheet { max-width: 960px; margin: 0 auto; padding: 0 20px 40px; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+    .qcard { background: #fff; border-radius: 24px; padding: 24px; text-align: center; border: 3px solid var(--c, var(--rose)); display: flex; flex-direction: column; align-items: center; gap: 6px; break-inside: avoid; }
+    .qcard .ic { width: 64px; height: 64px; display: block; } .qcard .ic svg { width: 100%; height: 100%; }
+    .qcard h2 { margin: 0; font-family: "Yusei Magic", "Zen Maru Gothic", sans-serif; font-weight: 400; font-size: 26px; }
+    .qcard .place { margin: 0; font-size: 14px; color: #4A4670; }
+    .qcard .qr { width: 100%; max-width: 260px; aspect-ratio: 1; margin: 8px 0; }
+    .qcard .qr svg { width: 100%; height: 100%; display: block; }
+    .qcard .how { margin: 0; font-weight: 700; }
+    .qcard .gift { margin: 0; font-size: 14px; color: var(--rose); font-weight: 700; }
+    .qcard .ev { margin: 6px 0 0; font-size: 13px; color: #4A4670; }
+    .qcard.stage { grid-column: 1 / -1; border-width: 6px; border-radius: 50%; aspect-ratio: 1; width: min(100%, 520px); margin: 0 auto; justify-content: center; padding: 48px; }
+    .qcard.stage h2 { font-size: 34px; }
+    .qcard.stage .qr { max-width: 240px; }
+    .dl { margin-top: 6px; min-height: 40px; font-size: 14px; background: #fff; color: var(--night); border: 2px solid var(--line); }
+    @media print {
+      @page { size: A4 portrait; margin: 12mm; }
+      body { background: #fff; }
+      .panel, .dl { display: none !important; }
+      .sheet { display: block; padding: 0; max-width: none; }
+      .qcard { width: 100%; height: 132mm; margin: 0 0 8mm; justify-content: center; page-break-inside: avoid; }
+      .qcard .qr { max-width: 80mm; }
+      .qcard.stage { width: 180mm; height: 180mm; margin: 30mm auto; page-break-after: always; }
+      .qcard.stage .qr { max-width: 75mm; }
+    }
+  </style>
+</head>
+<body>
+  <div class="panel">
+    <h1>QRコード印刷シート（スタッフ用）</h1>
+    <p>サイトを公開したURLで、床用・売り場用・レジ用（購入者限定）のQRコードを作ります。「印刷する」でA4に印刷できます。</p>
+    <label for="base">サイトの公開URL</label>
+    <input id="base" type="url" inputmode="url" autocomplete="off" spellcheck="false">
+    <div class="row">
+      <button id="make">QRコードを作りなおす</button>
+      <button id="print" class="sub">印刷する</button>
+    </div>
+    <p class="warn" style="margin-top:14px">床に貼るQRは一辺20cm以上を目安に、すべり止めラミネートで仕上げてください。立った大人のスマホから読めるか、必ず実機で確認してください。</p>
+    <details>
+      <summary>テスト用リンク（クリックで動作確認）</summary>
+      <div class="links" id="links"></div>
+    </details>
+  </div>
+  <div id="sheet" class="sheet"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/art.js"></script>
+  <script src="js/costumes.js"></script>
+  <script src="vendor/qrcode.js"></script>
+  <script src="js/qr.js"></script>
+</body>
+</html>
