@@ -5,7 +5,7 @@
 window.NRL_CONFIG = {
   eventName: '近未来なりきりランド',
   eventNameEn: 'Kinmirai Narikiri Land',
-  storeLabel: '高島屋 子供服・おもちゃ売り場',   // ヘッダーと写真のフチに表示
+  storeLabel: '子供服・おもちゃ売り場',   // ヘッダーと写真のフチに表示
   hashtag: '#近未来なりきりランド',
   period: '',                                    // 例: '2026.11.1 ― 12.25'（空なら非表示）
 
